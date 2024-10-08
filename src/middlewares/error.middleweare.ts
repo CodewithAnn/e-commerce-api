@@ -7,9 +7,10 @@ export const errorMiddleWear = async (
   response: Response,
   next: NextFunction
 ) => {
-  response.send(error.statusCode).json({
+  response.status(error.statusCode).json({
     message: error.message,
     errorCode: error.errorCode,
     error: error.errors,
   });
+  // return next();
 };

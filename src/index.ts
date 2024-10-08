@@ -3,6 +3,7 @@ import { PORT } from "./secrets.js";
 import rootRouter from "./routes/index.js";
 import { PrismaClient } from "@prisma/client";
 import { errorMiddleWear } from "./middlewares/error.middleweare.js";
+import { SignUpSchema } from "./schema/user.schema.js";
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,16 @@ app.use(errorMiddleWear);
 export const prismaClient = new PrismaClient({
   log: ["query"],
 });
+// .$extends({
+//   query: {
+//     user: {
+//       create({ args, query }) {
+//         args.data = SignUpSchema.parse(args.data);
+//         return query(args);
+//       },
+//     },
+//   },
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
